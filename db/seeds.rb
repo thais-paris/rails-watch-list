@@ -5,3 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
+
+Movie.destroy_all if Rails.env.development?
+
+10.times do
+  movie = Movie.create!(
+    title: Faker::Movie.title,
+    overview: Faker::Movie.quote,
+    poster_url: "https://thispersondoesnotexist.com/",
+    rating: rand(0..10)
+  )
+  puts "Movie created: #{movie.title}"
+end
